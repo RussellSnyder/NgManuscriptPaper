@@ -1,0 +1,10 @@
+<div class="staff-container" [ngStyle]="{'margin-bottom': staffFeatures.marginBottom + sizeUnits}">
+  <svg [attr.height]="staffHeight + sizeUnits" width="100%">
+    <line x1="0" x2="100%" *ngFor="let line of lines; let i = index"
+          [attr.y1]="i * staffFeatures.spacingBetweenLines + line.strokeWidth + sizeUnits"
+          [attr.y2]="i * staffFeatures.spacingBetweenLines + line.strokeWidth + sizeUnits"
+          [attr.stroke]="line.strokeColor"
+          [attr.stroke-width]="line.strokeWidth + sizeUnits"
+    />
+  </svg>
+</div>

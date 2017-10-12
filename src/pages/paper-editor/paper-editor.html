@@ -1,0 +1,14 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>Manuscript Paper</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <h2 text-center>{{ paperFeatures.title }}</h2>
+    <staff *ngFor="let staff of staves" [staffFeatures]="staff"></staff>
+    <h3 text-center>{{ paperFeatures.footer }}</h3>
+</ion-content>
