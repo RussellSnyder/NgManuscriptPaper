@@ -1,6 +1,13 @@
-<div>
-
-
-  color picker will go here
-
-</div>
+<ion-list>
+  <ion-item>
+    <ion-label stacked>Line Color</ion-label>
+    <ion-input type="color" value="{{lineFeatures.strokeColor}}" (change)="onLineColorChange($event)"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Line Thickness: {{lineFeatures.strokeWidth}}{{constants.sizeUnits}}</ion-label>
+    <ion-range [(ngModel)]="lineFeatures.strokeWidth" min="1" [max]="staffFeatures.spacingBetweenLines" (ionChange)="onStrokeWidthChange($event)">
+      <ion-icon range-left small name="remove"></ion-icon>
+      <ion-icon range-right big name="remove"></ion-icon>
+    </ion-range>
+  </ion-item>
+</ion-list>

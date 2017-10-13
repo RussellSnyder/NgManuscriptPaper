@@ -27,6 +27,9 @@ export class PaperEditorPage implements OnInit {
   constructor(private globalState: GlobalState) {
     this.paperFeatures = this.globalState.getGlobalState().paperFeatures;
     this.staffFeatures = this.globalState.getGlobalState().staffFeatures;
+    this.globalState.globalStateUpdate.subscribe(value => {
+      console.log(value, 'sheeet');
+    })
   }
 
   ngOnInit() {

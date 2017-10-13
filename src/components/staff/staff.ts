@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 import { Line } from '../../models/line';
 import { Constants } from '../../data/constants';
 import { GlobalState } from '../../services/globalstate'
@@ -25,13 +25,29 @@ export class StaffComponent implements OnInit{
   constructor(private globalState: GlobalState) {
     this.lineFeatures = this.globalState.getGlobalState().lineFeatures;
     this.staffFeatures = this.globalState.getGlobalState().staffFeatures;
+    this.updateStaffHeight();
+    this.updateLines();
+
+    this.globalState.globalStateUpdate.subscribe((globalState) => {
+      this.lineFeatures = globalState.lineFeatures;
+      this.staffFeatures = globalState.staffFeatures;
+      this.updateStaffHeight()
+      this.updateLines();
+    })
   }
 
   ngOnInit() {
+  }
+
+  updateLines() {
+    this.lines = [];
     for (let i = 0; i < this.staffFeatures.numberOfLines; i++) {
       this.lines.push(this.lineFeatures)
     }
 
-    this.staffHeight = (this.staffFeatures.spacingBetweenLines * this.staffFeatures.numberOfLines)
+  }
+
+  updateStaffHeight() {
+    this.staffHeight = this.staffFeatures.spacingBetweenLines * this.staffFeatures.numberOfLines
   }
 }

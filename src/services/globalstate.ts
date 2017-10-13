@@ -1,15 +1,19 @@
-import { Injectable } from "@angular/core";
+import {Injectable, EventEmitter, Output} from "@angular/core";
 import 'rxjs/Rx';
 
 import { Staff } from "../models/staff";
 import {Line} from "../models/line";
+import {Observable} from "rxjs/Observable";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class GlobalState {
+    public globalStateUpdate = new Subject<any>();
+
     private globalState = {
         lineFeatures: {
             strokeWidth: 1,
-            strokeColor: 'green'
+            strokeColor: '#cccccc'
         },
         paperFeatures: {
             numberOfStaves: 5,
@@ -29,5 +33,12 @@ export class GlobalState {
         return Object.assign({}, this.globalState);
     }
 
+    setGlobalState(feature, key, value) {
+        this.globalState[feature][key] = value;
+        this.emitUpdate()
+    }
 
+    emitUpdate() {
+        this.globalStateUpdate.next(this.globalState);
+    }
 }
