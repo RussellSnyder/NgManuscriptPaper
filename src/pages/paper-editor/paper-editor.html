@@ -9,6 +9,8 @@
 
 <ion-content padding>
     <h2 text-center>{{ paperFeatures.title }}</h2>
-    <staff *ngFor="let staff of staves" [staffFeatures]="staff"></staff>
+    <staff *ngFor="let staff of staves"></staff>
     <h3 text-center>{{ paperFeatures.footer }}</h3>
+    <line-editor-panel></line-editor-panel>
+    <staff-editor-panel></staff-editor-panel>
 </ion-content>

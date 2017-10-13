@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Constants} from "../../data/constants";
+import {GlobalState} from "../../services/globalstate";
 
 /**
  * Generated class for the PaperEditorPage page.
@@ -14,29 +15,23 @@ import {Constants} from "../../data/constants";
   selector: 'page-paper-editor',
   templateUrl: 'paper-editor.html',
 })
-export class PaperEditorPage {
+export class PaperEditorPage implements OnInit {
   sizeUnits = Constants.sizeUnits;
 
 
-  paperFeatures = {
-    numberOfStaves: 5,
-    title: 'Yes',
-    footer: 'why not?'
-  }
-
-  staffFeatures = {
-    numberOfLines: 5,
-    spacingBetweenLines: 2,
-    marginBottom: 2,
-  };
-
-
+  paperFeatures;
+  staffFeatures;
 
   staves = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private globalState: GlobalState) {
+    this.paperFeatures = this.globalState.getGlobalState().paperFeatures;
+    this.staffFeatures = this.globalState.getGlobalState().staffFeatures;
+  }
+
+  ngOnInit() {
     for (let i = 0; i < this.paperFeatures.numberOfStaves; i++) {
-      this.staves.push(this.staffFeatures)
+      this.staves.push(i)
     }
   }
 

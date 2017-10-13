@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Staff } from '../../models/staff';
 import { Line } from '../../models/line';
 import { Constants } from '../../data/constants';
+import { GlobalState } from '../../services/globalstate'
+
 /**
  * Generated class for the StaffComponent component.
  *
@@ -13,21 +14,17 @@ import { Constants } from '../../data/constants';
   templateUrl: 'staff.html'
 })
 export class StaffComponent implements OnInit{
-  @Input() staffFeatures;
-
   sizeUnits = Constants.sizeUnits;
 
-  lineFeatures = {
-    strokeWidth: 1,
-    strokeColor: 'red',
-  }
+  lineFeatures;
+  staffFeatures;
 
   lines: Line[] = [];
-  staves = [];
   staffHeight;
 
-  constructor() {
-
+  constructor(private globalState: GlobalState) {
+    this.lineFeatures = this.globalState.getGlobalState().lineFeatures;
+    this.staffFeatures = this.globalState.getGlobalState().staffFeatures;
   }
 
   ngOnInit() {

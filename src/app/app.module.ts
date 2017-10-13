@@ -8,14 +8,19 @@ import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
 import {PaperEditorPage} from '../pages/paper-editor/paper-editor';
 
-import { StaffComponent } from '../components/staff/staff'
 import {Deeplinks} from "@ionic-native/deeplinks";
+import {GlobalState} from "../services/globalstate";
+import {LineEditorPanelComponent} from "../components/line-editor-panel/line-editor-panel";
+import {StaffEditorPanelComponent} from "../components/staff-editor-panel/staff-editor-panel";
+import {StaffComponent} from "../components/staff/staff";
 
 @NgModule({
     declarations: [
         MyApp,
         HomePage,
         PaperEditorPage,
+        LineEditorPanelComponent,
+        StaffEditorPanelComponent,
         StaffComponent
     ],
     imports: [
@@ -26,12 +31,16 @@ import {Deeplinks} from "@ionic-native/deeplinks";
     entryComponents: [
         MyApp,
         HomePage,
-        PaperEditorPage
+        PaperEditorPage,
+        LineEditorPanelComponent,
+        StaffEditorPanelComponent,
+        StaffComponent
     ],
     providers: [
         Deeplinks,
         StatusBar,
         SplashScreen,
+        GlobalState,
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 })
