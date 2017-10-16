@@ -17,22 +17,49 @@ export class StaffEditorPanelComponent {
   staffFeatures;
   constants;
 
+  allowNumberofLinesDecrease;
+  allowNumberofLinesIncrease;
+
+  allowSpacingBetweenLinesIncrease = true;
+  allowSpacingBetweenLinesDecrease = true;
+
+  allowMarginBottomIncrease = true;
+  allowMarginBottomDecrease = true;
+
   constructor(private globalState: GlobalState) {
     this.lineFeatures = globalState.getGlobalState().lineFeatures
     this.staffFeatures = globalState.getGlobalState().staffFeatures
     this.constants = Constants;
+    this.setNumberOfLinesButtonDisableState();
   }
 
-  onNumberOfLinesChange($event) {
-    this.globalState.setGlobalState('staffFeatures', 'numberOfLines', parseInt($event.value))
+  onNumberOfLinesChange(direction) {
+    this.globalState.setGlobalState('staffFeatures', 'numberOfLines', this.staffFeatures.numberOfLines + direction)
+    this.setNumberOfLinesButtonDisableState();
   }
 
-  onSpacingBetweenLinesChange($event) {
-    this.globalState.setGlobalState('staffFeatures', 'spacingBetweenLines', parseInt($event.value))
+  onSpacingBetweenLinesChange(direction) {
+    this.globalState.setGlobalState('staffFeatures', 'spacingBetweenLines', this.staffFeatures.spacingBetweenLines + direction)
+    this.setSpacingBetweenLinesButtonDisableState();
   }
 
-  onSpacingBetweenStavesChange($event) {
-    this.globalState.setGlobalState('staffFeatures', 'marginBottom', parseInt($event.value))
+  onSpacingBetweenStavesChange(direction) {
+    this.globalState.setGlobalState('staffFeatures', 'marginBottom', this.staffFeatures.marginBottom + direction)
+    this.setSpacingBetweenStavesDisableState();
   }
 
+  setNumberOfLinesButtonDisableState() {
+      this.allowNumberofLinesDecrease = (this.staffFeatures.numberOfLines > 1)
+      this.allowNumberofLinesIncrease = (this.staffFeatures.numberOfLines < 10)
+  }
+
+  setSpacingBetweenLinesButtonDisableState() {
+    this.allowSpacingBetweenLinesDecrease = this.staffFeatures.spacingBetweenLines > 1;
+    this.allowSpacingBetweenLinesIncrease = this.staffFeatures.spacingBetweenLines < 10;
+  }
+
+  setSpacingBetweenStavesDisableState() {
+    this.allowMarginBottomDecrease = this.staffFeatures.marginBottom > 0;
+    this.allowMarginBottomIncrease = this.staffFeatures.marginBottom < 20;
+  }
 }

@@ -18,6 +18,9 @@ export class LineEditorPanelComponent {
   staffFeatures;
   constants;
 
+  allowStrokeWidthDecrease = false;
+  allowStrokeWidthIncrease = true;
+
   constructor(private globalState: GlobalState) {
     this.lineFeatures = globalState.getGlobalState().lineFeatures
     this.staffFeatures = globalState.getGlobalState().staffFeatures
@@ -28,8 +31,13 @@ export class LineEditorPanelComponent {
     this.globalState.setGlobalState('lineFeatures', 'strokeColor', $event.target.value)
   }
 
-  onStrokeWidthChange($event) {
-    this.globalState.setGlobalState('lineFeatures', 'strokeWidth', $event.value)
+  onStrokeWidthChange(direction) {
+    this.globalState.setGlobalState('lineFeatures', 'strokeWidth', this.lineFeatures.strokeWidth + direction)
+    this.setStrokeWidthButtonDisableState()
   }
 
+  setStrokeWidthButtonDisableState() {
+      this.allowStrokeWidthDecrease = this.lineFeatures.strokeWidth <= 1;
+      this.allowStrokeWidthIncrease = this.lineFeatures.strokeWidth >= this.staffFeatures.spacingBetweenLines;
+  }
 }

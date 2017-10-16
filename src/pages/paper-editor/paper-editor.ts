@@ -28,7 +28,7 @@ export class PaperEditorPage implements OnInit {
     this.paperFeatures = this.globalState.getGlobalState().paperFeatures;
     this.staffFeatures = this.globalState.getGlobalState().staffFeatures;
     this.globalState.globalStateUpdate.subscribe(value => {
-      console.log(value, 'sheeet');
+
     })
   }
 

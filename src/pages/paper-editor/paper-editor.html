@@ -11,6 +11,8 @@
     <h2 text-center>{{ paperFeatures.title }}</h2>
     <staff *ngFor="let staff of staves"></staff>
     <h3 text-center>{{ paperFeatures.footer }}</h3>
-    <line-editor-panel></line-editor-panel>
-    <staff-editor-panel></staff-editor-panel>
 </ion-content>
+<ion-footer>
+    <staff-editor-panel></staff-editor-panel>
+    <line-editor-panel></line-editor-panel>
+</ion-footer>

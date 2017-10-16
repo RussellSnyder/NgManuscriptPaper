@@ -1,23 +1,69 @@
-<ion-list>
-  <ion-item>
-    <ion-label stacked>Number Of Lines: {{staffFeatures.numberOfLines}}</ion-label>
-    <ion-range min="1" max="20" [(ngModel)]="staffFeatures.numberOfLines" (ionChange)="onNumberOfLinesChange($event)">
-      <ion-icon range-left name="remove"></ion-icon>
-      <ion-icon range-right name="add"></ion-icon>
-    </ion-range>
-  </ion-item>
-  <ion-item>
-    <ion-label stacked>Spacing Between Lines: {{staffFeatures.spacingBetweenLines}}{{constants.sizeUnits}}</ion-label>
-    <ion-range min="1" max="100" [(ngModel)]="staffFeatures.spacingBetweenLines" (ionChange)="onSpacingBetweenLinesChange($event)">
-      <ion-icon range-left name="remove"></ion-icon>
-      <ion-icon range-right name="add"></ion-icon>
-    </ion-range>
-  </ion-item>
-  <ion-item>
-    <ion-label stacked>Spacing Betwee Staves: {{staffFeatures.marginBottom}}{{constants.sizeUnits}}</ion-label>
-    <ion-range min="1" max="100" [(ngModel)]="staffFeatures.marginBottom" (ionChange)="onSpacingBetweenStavesChange($event)">
-      <ion-icon range-left name="remove"></ion-icon>
-      <ion-icon range-right name="add"></ion-icon>
-    </ion-range>
-  </ion-item>
-</ion-list>
+<div class="lines container">
+    <ion-item-divider>
+        <h2 text-center>Staff</h2>
+    </ion-item-divider>
+
+    <ion-row align-items>
+        <ion-col>
+            <h6 text-center>Number of Staff Lines</h6>
+            <ion-item no-lines>
+                <ion-row align-items-center>
+                    <ion-col>
+                        <button [disabled]="!allowNumberofLinesIncrease" ion-button full
+                                (click)="onNumberOfLinesChange(1)">
+                            <ion-icon name="arrow-up"></ion-icon>
+                        </button>
+                    </ion-col>
+                    <ion-col text-center>{{staffFeatures.numberOfLines}}</ion-col>
+                    <ion-col>
+                        <button [disabled]="!allowNumberofLinesDecrease" ion-button full
+                                (click)="onNumberOfLinesChange(-1)">
+                            <ion-icon name="arrow-down"></ion-icon>
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+
+        </ion-col>
+        <ion-col>
+            <h6 text-center>Space Between <strong>Lines</strong></h6>
+            <ion-item no-lines>
+                <ion-row align-items-center>
+                    <ion-col>
+                        <button [disabled]="!allowSpacingBetweenLinesIncrease" ion-button full
+                                (click)="onSpacingBetweenLinesChange(1)">
+                            <ion-icon name="arrow-up"></ion-icon>
+                        </button>
+                    </ion-col>
+                    <ion-col text-center>{{staffFeatures.spacingBetweenLines}}{{constants.sizeUnits}}</ion-col>
+                    <ion-col>
+                        <button [disabled]="!allowSpacingBetweenLinesDecrease" ion-button full
+                                (click)="onSpacingBetweenLinesChange(-1)">
+                            <ion-icon name="arrow-down"></ion-icon>
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-col>
+        <ion-col>
+            <h6 text-center>Space Under <strong>Staves</strong></h6>
+            <ion-item no-lines>
+                <ion-row align-items-center>
+                    <ion-col>
+                        <button [disabled]="!allowMarginBottomIncrease" ion-button full
+                                (click)="onSpacingBetweenStavesChange(1)">
+                            <ion-icon name="arrow-up"></ion-icon>
+                        </button>
+                    </ion-col>
+                    <ion-col text-center>{{staffFeatures.marginBottom}}{{constants.sizeUnits}}</ion-col>
+                    <ion-col>
+                        <button [disabled]="!allowMarginBottomDecrease" ion-button full
+                                (click)="onSpacingBetweenStavesChange(-1)">
+                            <ion-icon name="arrow-down"></ion-icon>
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+</div>

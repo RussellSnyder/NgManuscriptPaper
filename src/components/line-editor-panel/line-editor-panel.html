@@ -1,13 +1,36 @@
-<ion-list>
-  <ion-item>
-    <ion-label stacked>Line Color</ion-label>
-    <ion-input type="color" value="{{lineFeatures.strokeColor}}" (change)="onLineColorChange($event)"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label stacked>Line Thickness: {{lineFeatures.strokeWidth}}{{constants.sizeUnits}}</ion-label>
-    <ion-range [(ngModel)]="lineFeatures.strokeWidth" min="1" [max]="staffFeatures.spacingBetweenLines" (ionChange)="onStrokeWidthChange($event)">
-      <ion-icon range-left small name="remove"></ion-icon>
-      <ion-icon range-right big name="remove"></ion-icon>
-    </ion-range>
-  </ion-item>
-</ion-list>
+<div class="lines container">
+    <ion-item-divider>
+        <h2 text-center>Lines</h2>
+    </ion-item-divider>
+
+    <ion-row align-items-center>
+        <ion-col>
+            <ion-item no-lines>
+                <ion-label>Color:</ion-label>
+                <ion-input type="color" value="{{lineFeatures.strokeColor}}"
+                           (change)="onLineColorChange($event)"></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col>
+            <ion-item no-lines>
+                <ion-row align-items-center>
+                    Thickness: &nbsp;
+                    <ion-col>
+                        <button [disabled]="!allowStrokeWidthIncrease" ion-button full (click)="onStrokeWidthChange(1)">
+                            <ion-icon name="arrow-up"></ion-icon>
+                        </button>
+                    </ion-col>
+                    <ion-col text-center>
+                        <strong>{{lineFeatures.strokeWidth}}</strong>{{constants.sizeUnits}}
+                    </ion-col>
+                    <ion-col>
+                        <button [disabled]="!allowStrokeWidthDecrease" ion-button full
+                                (click)="onStrokeWidthChange(-1)">
+                            <ion-icon name="arrow-down"></ion-icon>
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+</div>
