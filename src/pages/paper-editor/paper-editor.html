@@ -8,9 +8,34 @@
 
 
 <ion-content padding>
-    <h2 text-center>{{ paperFeatures.title }}</h2>
+    <div #titleContainer>
+        <div class="title" [hidden]="editingTitle" text-center (click)="onEditText('title', true)" >
+            <h2>{{ paperFeatures.title }}&nbsp;&nbsp;<ion-icon name="create"></ion-icon></h2>
+        </div>
+        <div class="title edit" [hidden]="!editingTitle" text-center>
+            <h2>
+                <input type="text" value="{{ paperFeatures.title }}" text-center
+                       (change)="onTextChange($event, 'title')"
+                       (keyup.enter)="onEditText('title', false)"
+                >
+            </h2>
+        </div>
+    </div>
+
     <staff *ngFor="let staff of staves"></staff>
-    <h3 text-center>{{ paperFeatures.footer }}</h3>
+    <div #footerContainer>
+        <div class="title" [hidden]="editingFooterText" text-center (click)="onEditText('footer', true)" >
+            <h2>{{ paperFeatures.footer }}&nbsp;&nbsp;<ion-icon name="create"></ion-icon></h2>
+        </div>
+        <div class="title edit" [hidden]="!editingFooterText" text-center>
+            <h2>
+                <input type="text" value="{{ paperFeatures.footer }}" text-center
+                       (change)="onTextChange($event, 'footer')"
+                       (keyup.enter)="onEditText('footer', false)"
+                >
+            </h2>
+        </div>
+    </div>
 </ion-content>
 <ion-footer>
     <staff-editor-panel></staff-editor-panel>

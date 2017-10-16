@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import { IonicPage } from 'ionic-angular';
 import {Constants} from "../../data/constants";
 import {GlobalState} from "../../services/globalstate";
 
@@ -16,6 +16,22 @@ import {GlobalState} from "../../services/globalstate";
   templateUrl: 'paper-editor.html',
 })
 export class PaperEditorPage implements OnInit {
+  @ViewChild('titleContainer') titleContainer;
+  @ViewChild('footerContainer') footerContainer;
+  @HostListener('document:click', ['$event']) clickout(event) {
+    if(!this.titleContainer.nativeElement.contains(event.target)) {
+      if (this.editingTitle) {
+        this.onEditText('title', false)
+      }
+    }
+    if(!this.footerContainer.nativeElement.contains(event.target)) {
+      if (this.editingFooterText) {
+        this.onEditText('footer', false)
+      }
+    }
+  }
+
+
   sizeUnits = Constants.sizeUnits;
 
 
@@ -23,6 +39,9 @@ export class PaperEditorPage implements OnInit {
   staffFeatures;
 
   staves = [];
+
+  editingTitle = false;
+  editingFooterText = false;
 
   constructor(private globalState: GlobalState) {
     this.paperFeatures = this.globalState.getGlobalState().paperFeatures;
@@ -38,7 +57,19 @@ export class PaperEditorPage implements OnInit {
     }
   }
 
-  ionViewDidLoad() {
+
+  onEditText(location, shouldBeEditing) {
+    if (location === 'title') {
+      this.editingTitle = shouldBeEditing
+    }
+    if (location === 'footer') {
+      this.editingFooterText = shouldBeEditing
+    }
+
+  }
+
+  onTextChange($event, location) {
+    this.globalState.setGlobalState('paperFeatures', location, $event.target.value)
   }
 
 }

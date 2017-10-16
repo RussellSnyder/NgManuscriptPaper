@@ -1,9 +1,9 @@
-<div class="lines container">
-    <ion-item-divider>
-        <h2 text-center>Staff</h2>
+<div class="lines editor-panel">
+    <ion-item-divider (click)="staffOptionsShowing = !staffOptionsShowing">
+        <h2 text-center>Staff&nbsp;<ion-icon [name]="staffOptionsShowing ? 'arrow-up' : 'arrow-down'"></ion-icon></h2>
     </ion-item-divider>
 
-    <ion-row align-items>
+    <ion-row align-items [hidden]="!staffOptionsShowing">
         <ion-col>
             <h6 text-center>Number of Staff Lines</h6>
             <ion-item no-lines>
@@ -14,7 +14,7 @@
                             <ion-icon name="arrow-up"></ion-icon>
                         </button>
                     </ion-col>
-                    <ion-col text-center>{{staffFeatures.numberOfLines}}</ion-col>
+                    <ion-col text-center>&nbsp;{{staffFeatures.numberOfLines}}&nbsp;&nbsp;</ion-col>
                     <ion-col>
                         <button [disabled]="!allowNumberofLinesDecrease" ion-button full
                                 (click)="onNumberOfLinesChange(-1)">

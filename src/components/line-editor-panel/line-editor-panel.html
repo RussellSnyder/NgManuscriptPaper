@@ -1,20 +1,20 @@
-<div class="lines container">
-    <ion-item-divider>
-        <h2 text-center>Lines</h2>
+<div class="lines editor-panel">
+    <ion-item-divider (click)="lineEditorShowing = !lineEditorShowing">
+        <h2 text-center>Lines&nbsp;<ion-icon [name]="lineEditorShowing ? 'arrow-up' : 'arrow-down'"></ion-icon></h2>
     </ion-item-divider>
 
-    <ion-row align-items-center>
+    <ion-row align-items-center [hidden]="!lineEditorShowing">
         <ion-col>
+            <h6 text-center>Color</h6>
             <ion-item no-lines>
-                <ion-label>Color:</ion-label>
                 <ion-input type="color" value="{{lineFeatures.strokeColor}}"
                            (change)="onLineColorChange($event)"></ion-input>
             </ion-item>
         </ion-col>
         <ion-col>
+            <h6 text-center>Thickness</h6>
             <ion-item no-lines>
                 <ion-row align-items-center>
-                    Thickness: &nbsp;
                     <ion-col>
                         <button [disabled]="!allowStrokeWidthIncrease" ion-button full (click)="onStrokeWidthChange(1)">
                             <ion-icon name="arrow-up"></ion-icon>

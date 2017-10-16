@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Line } from '../../models/line';
 import { Constants } from '../../data/constants';
 import { GlobalState } from '../../services/globalstate'

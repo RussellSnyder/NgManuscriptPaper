@@ -17,6 +17,8 @@ export class StaffEditorPanelComponent {
   staffFeatures;
   constants;
 
+  staffOptionsShowing = false;
+
   allowNumberofLinesDecrease;
   allowNumberofLinesIncrease;
 
@@ -30,7 +32,13 @@ export class StaffEditorPanelComponent {
     this.lineFeatures = globalState.getGlobalState().lineFeatures
     this.staffFeatures = globalState.getGlobalState().staffFeatures
     this.constants = Constants;
-    this.setNumberOfLinesButtonDisableState();
+    this.setDisabledStates();
+
+    this.globalState.globalStateUpdate.subscribe(value => {
+      this.lineFeatures = value.lineFeatures;
+      this.staffFeatures = value.staffFeatures;
+      this.setDisabledStates();
+    })
   }
 
   onNumberOfLinesChange(direction) {
@@ -45,6 +53,12 @@ export class StaffEditorPanelComponent {
 
   onSpacingBetweenStavesChange(direction) {
     this.globalState.setGlobalState('staffFeatures', 'marginBottom', this.staffFeatures.marginBottom + direction)
+    this.setSpacingBetweenStavesDisableState();
+  }
+
+  setDisabledStates() {
+    this.setNumberOfLinesButtonDisableState();
+    this.setSpacingBetweenLinesButtonDisableState();
     this.setSpacingBetweenStavesDisableState();
   }
 
